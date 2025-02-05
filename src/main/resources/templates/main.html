@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/bootstrap.min.css'}">
+    <script th:src="@{'/js/bootstrap.bundle.min.js'}"></script>
+</head>
+<body>
+    <div th:include="navbar.html"></div>
+
+    <div class="container mt-3" >
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>MODEL</th>
+                    <th>ENGINE</th>
+                    <th>PRICE</th>
+                    <th>COUNTRY</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="m: ${mashini}">
+                    <td th:text="${m.id}"></td>
+                    <td th:text="${m.model}"></td>
+                    <td th:text="${m.engine}"></td>
+                    <td th:style="${m.cost>=100000}? 'color:red' : 'color:green'" th:text="${m.cost}"></td>
+                    <td th:text="${m.country}"></td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+</body>
+</html>
