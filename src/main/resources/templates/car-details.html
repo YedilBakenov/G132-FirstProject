@@ -55,15 +55,24 @@
                         <input type="text" class="form-control" name="country" th:value="${mashina.country}">
                     </div>
                 </div>
-            </form>
-            <form action="/car-delete" method="post">
-                <div class="row mt-3">
-                    <input type="hidden" name="id" th:value="${mashina.id}">
-                    <div class="col-12">
-                        <button class="btn btn-danger btn-sm">DELETE CAR</button>
+
+                <div class="d-flex">
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <button class="btn btn-success btn-sm">UPDATE CAR</button>
+                        </div>
                     </div>
+                    </form>
+                    <form action="/car-delete" method="post">
+                        <div class="row mt-3">
+                            <input type="hidden" name="id" th:value="${mashina.id}">
+                            <div class="col-12 ms-2">
+                                <button class="btn-danger btn btn-sm">DELETE</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+
         </div>
     </div>
 
