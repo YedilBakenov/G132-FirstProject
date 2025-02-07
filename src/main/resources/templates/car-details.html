@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/bootstrap.min.css'}">
+    <script th:src="@{'/js/bootstrap.bundle.min.js'}"></script>
+</head>
+<body>
+<div th:include="navbar.html"></div>
+
+<div class="container mt-3">
+
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form action="/update-car" method="post">
+                <input type="hidden" name="id" th:value="${mashina.id}">
+                <div class="row">
+                    <div class="col-12">
+                        <label>MODEL</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control" name="model" th:value="${mashina.model}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label>ENGINE</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control" name="engine" th:value="${mashina.engine}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label>COST</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="number" class="form-control" name="cost" th:value="${mashina.cost}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label>COUNTRY</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control" name="country" th:value="${mashina.country}">
+                    </div>
+                </div>
+            </form>
+            <form action="/car-delete" method="post">
+                <div class="row mt-3">
+                    <input type="hidden" name="id" th:value="${mashina.id}">
+                    <div class="col-12">
+                        <button class="btn btn-danger btn-sm">DELETE CAR</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
