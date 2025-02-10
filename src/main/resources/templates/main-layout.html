@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/bootstrap.min.css'}">
+    <script th:src="@{'/js/bootstrap.bundle.min.js'}"></script>
+</head>
+<body>
+    <div th:insert="navbar.html"></div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-3">
+                <ul class="list-group">
+                    <li class="list-group-item">Toyota</li>
+                    <li class="list-group-item list-group-item-primary">BMW</li>
+                    <li class="list-group-item list-group-item-secondary">Mercedes</li>
+                    <li class="list-group-item list-group-item-success">Lexus</li>
+                    <li class="list-group-item list-group-item-danger">Aston Martin</li>
+                </ul>
+            </div>
+
+            <div class="col-9" layout:fragment="content"></div>
+
+        </div>
+    </div>
+
+</body>
+</html>

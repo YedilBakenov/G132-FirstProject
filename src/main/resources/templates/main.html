@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+                layout:decorate="main-layout.html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" th:href="@{'/css/bootstrap.min.css'}">
-    <script th:src="@{'/js/bootstrap.bundle.min.js'}"></script>
 </head>
 <body>
-    <div th:include="navbar.html"></div>
 
-    <div class="container mt-3" >
+    <div layout:fragment="content">
         <table class="table table-striped">
             <thead>
                 <tr>
