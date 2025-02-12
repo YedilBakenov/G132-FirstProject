@@ -1,10 +1,13 @@
 package kz.first_project.g132.db;
 
 import kz.first_project.g132.model.Car;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Component
 public class DBManager {
 
     private static List<Car> cars = new ArrayList<>();

@@ -1,29 +1,41 @@
 package kz.first_project.g132.controller;
 
+import kz.first_project.g132.component.PrototypeComponent;
 import kz.first_project.g132.db.DBManager;
 import kz.first_project.g132.model.Car;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 @Controller
+@RequiredArgsConstructor
+@RequestMapping("/api/cars/")
 public class HomeController {
+
+    private final DBManager dbManager;
+    private final ObjectProvider<PrototypeComponent> prototypeComponent;
+
+    @GetMapping(value = "/prototype")
+    public String getPrototype(){
+        System.out.println(prototypeComponent.getObject().getId());
+        return "redirect:/api/cars/";
+    }
 
     @GetMapping(value = "/")
     public String getHomePage(Model model){
-        model.addAttribute("mashini", DBManager.getAllCars());
+        model.addAttribute("mashini", dbManager.getAllCars());
         return "main";
     }
 
     @PostMapping(value = "/add-car")
     public String addCar(Car car){
-        DBManager.addCar(car);
-        return "redirect:/";
+        dbManager.addCar(car);
+        return "redirect:/api/cars/";
     }
 
     @GetMapping(value = "/add-car")
@@ -34,21 +46,21 @@ public class HomeController {
     @GetMapping(value = "/car-details/{id}")
     public String carDetailsPage(@PathVariable int id,
                                  Model model){
-        model.addAttribute("mashina", DBManager.getCarById(id));
+        model.addAttribute("mashina", dbManager.getCarById(id));
         return "car-details";
     }
 
     @PostMapping(value = "/update-car")
     public String updateCar(Car car){
 
-        DBManager.updateCar(car);
-        return "redirect:/";
+        dbManager.updateCar(car);
+        return "redirect:/api/cars/";
     }
 
     @PostMapping(value = "/car-delete")
     public String deleteCar(@RequestParam int id){
-        DBManager.deleteCar(id);
-        return "redirect:/";
+        dbManager.deleteCar(id);
+        return "redirect:/api/cars/";
     }
 
 

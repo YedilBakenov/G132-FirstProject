@@ -1,39 +1,109 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-                layout:decorate="main-layout.html">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="main-layout.html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
-    <div layout:fragment="content">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>MODEL</th>
-                    <th>ENGINE</th>
-                    <th>PRICE</th>
-                    <th>COUNTRY</th>
-                    <th>DETAILS</th>
-                </tr>
-            </thead>
+<div layout:fragment="content">
 
-            <tbody>
-                <tr th:each="m: ${mashini}">
-                    <td th:text="${m.id}"></td>
-                    <td th:text="${m.model}"></td>
-                    <td th:text="${m.engine}"></td>
-                    <td th:style="${m.cost>=100000}? 'color:red' : 'color:green'" th:text="${m.cost}"></td>
-                    <td th:text="${m.country}"></td>
-                    <td style="width: 8%"> <a class="btn btn-secondary btn-sm" th:href="@{'/car-details/' + ${m.id}}">DETAILS</a> </td>
-                </tr>
-            </tbody>
+    <button type="button" class="btn btn-success btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#addcar">
+        + ADD CAR
+    </button>
 
-        </table>
+    <div class="modal fade" id="addcar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">WINDOW ADD CAR</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/api/cars/add-car" method="post">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label>MODEL</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" name="model">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label>ENGINE</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" name="engine">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label>COST</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="number" class="form-control" name="cost">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label>COUNTRY</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" name="country">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success btn-sm">ADD CAR</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <table class="table table-striped mt-3">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>MODEL</th>
+            <th>ENGINE</th>
+            <th>PRICE</th>
+            <th>COUNTRY</th>
+            <th>DETAILS</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="m: ${mashini}">
+            <td th:text="${m.id}"></td>
+            <td th:text="${m.model}"></td>
+            <td th:text="${m.engine}"></td>
+            <td th:style="${m.cost>=100000}? 'color:red' : 'color:green'" th:text="${m.cost}"></td>
+            <td th:text="${m.country}"></td>
+            <td style="width: 8%"><a class="btn btn-secondary btn-sm" th:href="@{'/car-details/' + ${m.id}}">DETAILS</a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
 
 </body>
 </html>
