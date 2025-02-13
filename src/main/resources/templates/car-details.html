@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-                layout:decorate="main-layout.html">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="main-layout.html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,7 +10,7 @@
 
 <div layout:fragment="content">
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             <form action="/update-car" method="post">
                 <input type="hidden" name="id" th:value="${mashina.id}">
                 <div class="row">
@@ -60,21 +60,17 @@
                             <button class="btn btn-success btn-sm">UPDATE CAR</button>
                         </div>
                     </div>
-                    </form>
-                    <form action="/car-delete" method="post">
-                        <div class="row mt-3">
-                            <input type="hidden" name="id" th:value="${mashina.id}">
-                            <div class="col-12 ms-2">
-                                <button class="btn-danger btn btn-sm">DELETE</button>
-                            </div>
-                        </div>
-                    </form>
+            </form>
+            <form action="/car-delete" method="post">
+                <div class="row mt-3">
+                    <input type="hidden" name="id" th:value="${mashina.id}">
+                    <div class="col-12 ms-2">
+                        <button class="btn-danger btn btn-sm">DELETE</button>
+                    </div>
                 </div>
-
+            </form>
         </div>
     </div>
-
 </div>
-
 </body>
 </html>

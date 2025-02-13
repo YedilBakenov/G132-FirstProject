@@ -7,17 +7,16 @@
     <link rel="stylesheet" type="text/css" th:href="@{'/css/bootstrap.min.css'}">
     <script th:src="@{'/js/bootstrap.bundle.min.js'}"></script>
 </head>
-<body>
+<body style="background-image: url('https://cdn5.vedomosti.ru/image/2015/5v/ueq8b/original-13er.jpg')">
     <div th:insert="navbar.html"></div>
 
     <div class="container">
         <div class="row">
-
-
             <div class="col-9" layout:fragment="content"></div>
 
             <div class="col-3">
-                <ul class="list-group">
+                <h3 class="mt-2 text-success" style="color: white">OUR BRANDS</h3>
+                <ul class="list-group mt-5">
                     <li class="list-group-item">Toyota</li>
                     <li class="list-group-item list-group-item-primary">BMW</li>
                     <li class="list-group-item list-group-item-secondary">Mercedes</li>
