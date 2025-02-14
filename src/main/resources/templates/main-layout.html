@@ -7,21 +7,23 @@
     <link rel="stylesheet" type="text/css" th:href="@{'/css/bootstrap.min.css'}">
     <script th:src="@{'/js/bootstrap.bundle.min.js'}"></script>
 </head>
-<body style="background-image: url('https://cdn5.vedomosti.ru/image/2015/5v/ueq8b/original-13er.jpg')">
+<body style="background-image: url('https://images-porsche.imgix.net/-/media/04A00A110697442F84092F6E6ACF05CD_77AF125DD84E48C7B950A7ECBD75DEB5_CZ25W18OX0003-911-gt3-white-front?w=1720&h=1232&q=45&crop=faces%2Centropy%2Cedges&auto=format')">
     <div th:insert="navbar.html"></div>
 
     <div class="container">
         <div class="row">
             <div class="col-9" layout:fragment="content"></div>
 
-            <div class="col-3">
-                <h3 class="mt-2 text-success" style="color: white">OUR BRANDS</h3>
+            <div class="col-3 mt-3">
                 <ul class="list-group mt-5">
                     <li class="list-group-item">Toyota</li>
                     <li class="list-group-item list-group-item-primary">BMW</li>
                     <li class="list-group-item list-group-item-secondary">Mercedes</li>
                     <li class="list-group-item list-group-item-success">Lexus</li>
                     <li class="list-group-item list-group-item-danger">Aston Martin</li>
+                    <li class="list-group-item list-group-item-primary">Porsche</li>
+                    <li class="list-group-item list-group-item-primary">Gelly</li>
+                    <li class="list-group-item list-group-item-secondary">Ferrari</li>
                 </ul>
             </div>
 

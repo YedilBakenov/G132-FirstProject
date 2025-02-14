@@ -52,7 +52,6 @@ public class HomeController {
 
     @PostMapping(value = "/update-car")
     public String updateCar(Car car){
-
         dbManager.updateCar(car);
         return "redirect:/api/cars/";
     }
