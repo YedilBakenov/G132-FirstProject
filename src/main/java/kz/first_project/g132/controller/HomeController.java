@@ -1,6 +1,7 @@
 package kz.first_project.g132.controller;
 
 import kz.first_project.g132.component.PrototypeComponent;
+import kz.first_project.g132.db.DBConnector;
 import kz.first_project.g132.db.DBManager;
 import kz.first_project.g132.model.Car;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class HomeController {
 
     private final DBManager dbManager;
+    private final DBConnector dbConnector;
     private final ObjectProvider<PrototypeComponent> prototypeComponent;
 
     @GetMapping(value = "/prototype")
@@ -28,13 +30,13 @@ public class HomeController {
 
     @GetMapping(value = "/")
     public String getHomePage(Model model){
-        model.addAttribute("mashini", dbManager.getAllCars());
+        model.addAttribute("mashini", dbConnector.getAllCars());
         return "main";
     }
 
     @PostMapping(value = "/add-car")
     public String addCar(Car car){
-        dbManager.addCar(car);
+        dbConnector.addCar(car);
         return "redirect:/api/cars/";
     }
 
@@ -46,19 +48,19 @@ public class HomeController {
     @GetMapping(value = "/car-details/{id}")
     public String carDetailsPage(@PathVariable int id,
                                  Model model){
-        model.addAttribute("mashina", dbManager.getCarById(id));
+        model.addAttribute("mashina", dbConnector.getCarById(id));
         return "car-details";
     }
 
     @PostMapping(value = "/update-car")
     public String updateCar(Car car){
-        dbManager.updateCar(car);
+        dbConnector.updateCar(car);
         return "redirect:/api/cars/";
     }
 
     @PostMapping(value = "/car-delete")
     public String deleteCar(@RequestParam int id){
-        dbManager.deleteCar(id);
+        dbConnector.deleteCar(id);
         return "redirect:/api/cars/";
     }
 
