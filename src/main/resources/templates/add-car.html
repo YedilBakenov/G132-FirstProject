@@ -51,6 +51,20 @@
                         <input type="text" class="form-control" name="country">
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label>MANUFACTURERS</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <select class="form-control" name="manufacturer.id">
+                            <option th:each="man: ${zavodi}"
+                                    th:value="${man.id}"
+                                    th:text="${man.getName() + '/' + man.getCountry()}"></option>
+                        </select>
+                    </div>
+                </div>
                 <div class="row mt-3">
                     <div class="col-12">
                         <button class="btn btn-success btn-sm">ADD CAR</button>

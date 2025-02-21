@@ -66,6 +66,20 @@
                                         <input type="text" class="form-control" name="country">
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label>MANUFACTURERS</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <select class="form-control" name="manufacturer.id">
+                                            <option th:each="man: ${zavodi}"
+                                                    th:value="${man.id}"
+                                                    th:text="${man.getName() + '/' + man.getCountry()}"></option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -86,6 +100,7 @@
             <th>ENGINE</th>
             <th>PRICE</th>
             <th>COUNTRY</th>
+            <th>MANUFACTURER</th>
             <th>DETAILS</th>
         </tr>
         </thead>
@@ -96,6 +111,7 @@
             <td th:text="${m.model}"></td>
             <td th:text="${m.engine}"></td>
             <td th:style="${m.cost>=100000}? 'color:red' : 'color:green'" th:text="${m.cost}"></td>
+            <td th:text="${m.manufacturer.getName() + '/' + m.manufacturer.getCountry()}"></td>
             <td th:text="${m.country}"></td>
             <td style="width: 8%"><a class="btn btn-secondary btn-sm" th:href="@{'/api/cars/car-details/' + ${m.id}}">DETAILS</a>
             </td>

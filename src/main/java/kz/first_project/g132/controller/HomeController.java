@@ -31,6 +31,7 @@ public class HomeController {
     @GetMapping(value = "/")
     public String getHomePage(Model model){
         model.addAttribute("mashini", dbConnector.getAllCars());
+        model.addAttribute("zavodi", dbConnector.getAllManufacturers());
         return "main";
     }
 
@@ -41,7 +42,8 @@ public class HomeController {
     }
 
     @GetMapping(value = "/add-car")
-    public String addCarPage(){
+    public String addCarPage(Model model){
+        model.addAttribute("zavodi", dbConnector.getAllManufacturers());
         return "add-car";
     }
 
@@ -49,6 +51,7 @@ public class HomeController {
     public String carDetailsPage(@PathVariable int id,
                                  Model model){
         model.addAttribute("mashina", dbConnector.getCarById(id));
+        model.addAttribute("zavodi", dbConnector.getAllManufacturers());
         return "car-details";
     }
 

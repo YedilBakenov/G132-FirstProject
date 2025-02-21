@@ -1,6 +1,7 @@
 package kz.first_project.g132.db;
 
 import kz.first_project.g132.model.Car;
+import kz.first_project.g132.model.Manufacturer;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -27,12 +28,40 @@ public class DBConnector {
         }
     }
 
+    public List<Manufacturer> getAllManufacturers(){
+        List<Manufacturer> list = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM manufacturers");
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                Manufacturer manufacturer = new Manufacturer();
+                manufacturer.setId(resultSet.getInt("id"));
+                manufacturer.setName(resultSet.getString("name"));
+                manufacturer.setCountry(resultSet.getString("strana"));
+
+                list.add(manufacturer);
+            }
+
+            statement.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+
     public List<Car> getAllCars() {
 
         List<Car> cars = new ArrayList<>();
 
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM cars");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM cars c " +
+                    "INNER JOIN manufacturers m ON c.manufacturer_id = m.id ORDER BY c.id ASC");
 
             ResultSet resultSet = statement.executeQuery(); // когда мы тянем данные из таблицы
 
@@ -43,6 +72,13 @@ public class DBConnector {
                 car.setModel(resultSet.getString("model"));
                 car.setCountry(resultSet.getString("country"));
                 car.setEngine(resultSet.getDouble("engine"));
+
+                Manufacturer manufacturer = new Manufacturer();
+                manufacturer.setId(resultSet.getInt("manufacturer_id"));
+                manufacturer.setName(resultSet.getString("name"));
+                manufacturer.setCountry(resultSet.getString("strana"));
+
+                car.setManufacturer(manufacturer);
 
                 cars.add(car);
             }
@@ -61,13 +97,14 @@ public class DBConnector {
         try {
 
             PreparedStatement statement = connection.prepareStatement("INSERT INTO cars " +
-                    "(model, engine, cost, country) " +
-                    "VALUES (?, ?, ?, ?)");
+                    "(model, engine, cost, country, manufacturer_id) " +
+                    "VALUES (?, ?, ?, ?, ?)");
 
             statement.setString(1, car.getModel());
             statement.setDouble(2, car.getEngine());
             statement.setInt(3, car.getCost());
             statement.setString(4, car.getCountry());
+            statement.setInt(5, car.getManufacturer().getId());
 
             statement.executeUpdate();
             statement.close();
@@ -107,13 +144,14 @@ public class DBConnector {
         try {
 
             PreparedStatement statement = connection.prepareStatement("UPDATE cars SET model=?, engine=?, cost=?, " +
-                    "country=? WHERE id=?");
+                    "country=?, manufacturer_id=? WHERE id=?");
 
             statement.setString(1, car.getModel());
             statement.setDouble(2, car.getEngine());
             statement.setInt(3, car.getCost());
             statement.setString(4, car.getCountry());
-            statement.setInt(5, car.getId());
+            statement.setInt(5, car.getManufacturer().getId());
+            statement.setInt(6, car.getId());
 
             statement.executeUpdate();
             statement.close();

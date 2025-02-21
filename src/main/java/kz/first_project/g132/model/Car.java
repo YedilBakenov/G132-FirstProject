@@ -15,4 +15,5 @@ public class Car {
     private double engine;
     private int cost;
     private String country;
+    private Manufacturer manufacturer;
 }
