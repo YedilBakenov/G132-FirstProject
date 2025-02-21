@@ -63,7 +63,8 @@
                         <select class="form-control" name="manufacturer.id">
                             <option th:each="man: ${zavodi}"
                                     th:value="${man.id}"
-                                    th:text="${man.name + '/' + man.country}">
+                                    th:text="${man.name + '/' + man.country}"
+                                    th:selected="${man.id==mashina.manufacturer.id}">
                             </option>
                         </select>
                     </div>

@@ -118,7 +118,12 @@ public class DBConnector {
 
         Car car = new Car();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM cars WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * " +
+                    "FROM cars c " +
+                    "INNER JOIN manufacturers m " +
+                    "ON c.manufacturer_id = m.id " +
+                    "WHERE c.id = ?");
+
             statement.setInt(1, id);
 
             ResultSet resultSet = statement.executeQuery();
@@ -129,6 +134,13 @@ public class DBConnector {
                 car.setCost(resultSet.getInt("cost"));
                 car.setEngine(resultSet.getDouble("engine"));
                 car.setCountry(resultSet.getString("country"));
+
+                Manufacturer manufacturer = new Manufacturer();
+                manufacturer.setCountry(resultSet.getString("strana"));
+                manufacturer.setName(resultSet.getString("name"));
+                manufacturer.setId(resultSet.getInt("manufacturer_id"));
+
+                car.setManufacturer(manufacturer);
 
                 statement.close();
             }
